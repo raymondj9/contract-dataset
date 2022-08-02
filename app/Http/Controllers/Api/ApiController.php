@@ -29,11 +29,10 @@ class ApiController extends Controller {
             $import = new DataImport;
             Excel::import($import,$request->file('dataset'));
             $rows = $import->data->toArray();
-            dd($rows[0]);
             return response()->json([
-                'success' => false,
+                'success' => true,
                 'message' => 'Data upload was successful',
-            ], 400);
+            ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
@@ -93,7 +92,7 @@ class ApiController extends Controller {
         $status = ($data->read) ? true : false;
         return response()->json([
             'status' => $status
-        ], 400);
+        ], 200);
     }
 
     
