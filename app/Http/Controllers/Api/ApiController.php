@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ApiController extends Controller {
-    
+    // Import dataset
     public function uploadDataset(Request $request) {
         $data = $request->only('dataset');
         $validator = Validator::make($data,[
@@ -42,6 +42,7 @@ class ApiController extends Controller {
         }
     }
 
+    // Search database records by amount, winning_company and date
     public function search(Request $request) {
         $query = $request->all();
         if (empty($query)) {
@@ -74,6 +75,7 @@ class ApiController extends Controller {
         ], 200);
     }
 
+    // get contract by ID
     public function getContractById($id) {
         $data = DataSet::find($id);
         DataSet::find($id)->update([
@@ -85,6 +87,7 @@ class ApiController extends Controller {
         ], 200);
     }
 
+    // check contract read status
     public function checkReadStatus($id) {
         $data = DataSet::find($id);
         $status = ($data->read) ? true : false;
